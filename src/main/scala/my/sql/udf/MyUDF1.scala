@@ -7,6 +7,7 @@ import org.apache.spark.sql.SparkSession
   * local模式下，读取远端的hive数据
   */
 object MyUDF1 {
+
   case class Record(search_word: String, url: String, search_kind: String)
 
   def main(args: Array[String]): Unit = {
@@ -31,21 +32,26 @@ object MyUDF1 {
 
     df.createTempView("sogoue")
 
-//    import java.util.Date
-//    //函数体
-//    val formatDate = (str:String) => {
-//      import java.text.SimpleDateFormat
-//      val sdf = new SimpleDateFormat("yyyy-MM-dd")
-//      val date = sdf.parse(str)
-//      sdf.format(date)
-//    }
-//
-//    println(formatDate("2017-09-18 16:07:01"))
+    //    import java.util.Date
+    //    //函数体
+    //    val formatDate = (str:String) => {
+    //      import java.text.SimpleDateFormat
+    //      val sdf = new SimpleDateFormat("yyyy-MM-dd")
+    //      val date = sdf.parse(str)
+    //      sdf.format(date)
+    //    }
+    //
+    //    println(formatDate("2017-09-18 16:07:01"))
 
     spark.udf.register("formatDate", UDFS.formatDate)
+    spark.udf.register("isSearchKind2", UDFS.isSearchKind2)
 
-    val result = spark.sql("SELECT *, formatDate(now()) FROM sogoue")
-    result.show()
+    val result1 = spark.sql("SELECT *, formatDate(now()) FROM sogoue")
+    result1.show()
+
+
+    val result2 = spark.sql("SELECT * FROM sogoue where isSearchKind2(search_kind)")
+    result2.show()
 
     spark.stop()
   }
