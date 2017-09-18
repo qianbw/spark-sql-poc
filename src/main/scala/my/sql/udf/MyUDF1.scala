@@ -2,7 +2,9 @@ package my.sql.udf
 
 import org.apache.spark.sql.SparkSession
 
-
+/**
+  * local模式下，读取远端的hive数据
+  */
 object MyUDF1 {
   case class Record(search_word: String, url: String, search_kind: String)
 
