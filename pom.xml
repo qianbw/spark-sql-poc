@@ -125,7 +125,8 @@
                                 <transformer
                                         implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
                                     <!--<mainClass>my.sql.hive.SparkHiveStandalone</mainClass>-->
-                                    <mainClass>my.sql.hive.SparkHiveForSubmit</mainClass>
+                                    <!--<mainClass>my.sql.hive.SparkHiveForSubmit</mainClass>-->
+                                    <mainClass>my.sql.udf.MyUDFForSubmit</mainClass>
                                 </transformer>
 
                             </transformers>
