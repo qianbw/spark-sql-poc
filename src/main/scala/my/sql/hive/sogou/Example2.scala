@@ -12,7 +12,8 @@ object Example2 {
     //  driver本来是要放在集群中运行的。现在在本地运行，会导致很多配置文件确实。需要补充。例如从hivemetadata获取到了表路径webankcluster就不认识。
     val spark = SparkSession
       .builder()
-      .master("spark://192.168.56.103:7077")
+      //.master("spark://192.168.56.103:7077")
+      .master("local[*]")
       .appName("Example2")
       .config("spark.sql.warehouse.dir", warehouseLocation)
       .config("hive.metastore.uris", "thrift://bdp-03:9083")
