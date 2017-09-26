@@ -41,7 +41,10 @@ object Example2 {
     //result1.show()
 
     /************ now **************/
-    val result = spark.sql("SELECT *, now() FROM sogoue")
+    //val result = spark.sql("SELECT *, now() FROM sogoue")
+
+    val result = spark.sql("select t.userid, count(1) as num from spark_test.sogouq_reduced t group by t.userid order by num desc limit 10")
+
     result.show()
 
     spark.stop()
